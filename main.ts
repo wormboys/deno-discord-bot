@@ -58,10 +58,12 @@ async function home(request: Request) {
 								{
 									type: 2,
 									label: "How to use this bot",
+                                    style: 1,
 								},
 								{
 									type: 2,
 									label: "What commands are available",
+                                    style: 1,
 								},
 							],
 						},

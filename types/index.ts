@@ -2,6 +2,7 @@
 export interface Command {
 	name: string;
 	description: string;
+    options?: any[];
 }
 
 export interface Options {
