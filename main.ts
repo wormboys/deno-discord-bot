@@ -51,21 +51,21 @@ async function home(request: Request) {
 				data: {
 					content:
 						"Hey, I am glad you are asking for help, noob. What do you need help with?",
-					// components: [
-					// 	{
-					// 		type: 1, // add enum for component types later
-					// 		components: [
-					// 			{
-					// 				type: 2,
-					// 				label: "How to use this bot",
-					// 			},
-					// 			{
-					// 				type: 2,
-					// 				label: "What commands are available",
-					// 			},
-					// 		],
-					// 	},
-					// ],
+					components: [
+						{
+							type: 1, // add enum for component types later
+							components: [
+								{
+									type: 2,
+									label: "How to use this bot",
+								},
+								{
+									type: 2,
+									label: "What commands are available",
+								},
+							],
+						},
+					],
 				},
 			});
 		}
