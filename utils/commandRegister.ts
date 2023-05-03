@@ -1,7 +1,7 @@
 // add commands to the bot
 import { load } from "https://deno.land/std@0.185.0/dotenv/mod.ts";
-import { Command } from "./types/index.ts";
-import { DiscordRequest } from "./utils/discordApi.ts";
+import { Command } from "../types/index.ts";
+import { DiscordRequest } from "./discordApi.ts";
 const env = await load();
 
 // commands to add to the bot, should contain a name and a description
