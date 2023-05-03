@@ -38,11 +38,11 @@ async function home(request: Request) {
 
 	// extract the body of the request (and provide default values)
 	const { type = 0, data = { options: [] } } = JSON.parse(body);
-	if (type === 1) {
+	if (type == InteractionType.PING) {
 		return json({ type: 1 });
 	}
 
-	if (type === InteractionType.APPLICATION_COMMAND) {
+	if (type == InteractionType.APPLICATION_COMMAND) {
 		// extract name and options from data
 		const { name } = data;
 		if (name === "help") {
