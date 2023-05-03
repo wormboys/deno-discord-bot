@@ -38,7 +38,7 @@ async function home(request: Request) {
 
 	// extract the body of the request (and provide default values)
 	const { type = 0, data = { options: [] } } = JSON.parse(body);
-	if (type === InteractionType.PING) {
+	if (type === 1) {
 		return json({ type: 1 });
 	}
 
