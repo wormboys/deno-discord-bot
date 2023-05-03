@@ -5,8 +5,6 @@ import {
 	validateRequest,
 } from "https://deno.land/x/sift@0.6.0/mod.ts";
 
-import nacl from "https://cdn.skypack.dev/tweetnacl@v1.0.3?dts";
-
 // import our functions from other files
 import { verifySignature } from "./utils/discordApi.ts";
 import { InteractionResponseType, InteractionType } from "./types/index.ts";
@@ -46,28 +44,28 @@ async function home(request: Request) {
 
 	if (type === InteractionType.APPLICATION_COMMAND) {
 		// extract name and options from data
-		const { name, options } = data;
+		const { name } = data;
 		if (name === "help") {
 			return json({
 				type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
 				data: {
 					content:
 						"Hey, I am glad you are asking for help, noob. What do you need help with?",
-					components: [
-						{
-							type: 1, // add enum for component types later
-							components: [
-								{
-									type: 2,
-									label: "How to use this bot",
-								},
-								{
-									type: 2,
-									label: "What commands are available",
-								},
-							],
-						},
-					],
+					// components: [
+					// 	{
+					// 		type: 1, // add enum for component types later
+					// 		components: [
+					// 			{
+					// 				type: 2,
+					// 				label: "How to use this bot",
+					// 			},
+					// 			{
+					// 				type: 2,
+					// 				label: "What commands are available",
+					// 			},
+					// 		],
+					// 	},
+					// ],
 				},
 			});
 		}

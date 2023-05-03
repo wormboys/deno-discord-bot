@@ -1,7 +1,12 @@
+import nacl from "https://cdn.skypack.dev/tweetnacl@v1.0.3?dts";
+import { hexToUint8Array } from "./utils.ts";
+import { load } from "https://deno.land/std@0.185.0/dotenv/mod.ts";
+import { Options } from "../types/index.ts";
+const env = await load();
 
 /** Verify whether the request is coming from Discord. */
 export async function verifySignature(request: Request) {
-	const PUBLIC_KEY = Deno.env.get("DISCORD_PUBLIC_KEY")!;
+	const PUBLIC_KEY = env["DISCORD_PUBLIC_KEY"];
 	const signature = request.headers.get("X-Signature-Ed25519")!;
 	const timestamp = request.headers.get("X-Signature-Timestamp")!;
 	const body = await request.text();
