@@ -1,12 +1,11 @@
 // add commands to the bot
-import { load } from "https://deno.land/std/dotenv/mod.ts";
+import { load } from "https://deno.land/std@0.185.0/dotenv/mod.ts";
+import { Command } from "./types/index.ts";
+import { DiscordRequest } from "./utils/discordApi.ts";
 const env = await load();
 
-interface Command {
-	name: string;
-	description: string;
-}
-
+// commands to add to the bot, should contain a name and a description
+// Can add types as we get more complicated
 const commands: Command[] = [
 	{
 		name: "ping",
@@ -30,26 +29,6 @@ const commands: Command[] = [
 	},
 ];
 
-async function DiscordRequest(endpoint: string, options: any) {
-	const baseUrl = "https://discord.com/api/v10";
-	const url = `${baseUrl}/${endpoint}`;
-	if (options.body) {
-		options.body = JSON.stringify(options.body);
-	}
-	const response: Response = await fetch(url, {
-		headers: {
-			Authorization: `Bot ${env["DISCORD_TOKEN"]}`,
-			"content-type": "application/json; charset=UTF-8",
-			"User-Agent": "DiscordBot (https://github.com/wormboys, 0.0.1)",
-		},
-		...options,
-	});
-	if (!response.ok) {
-		console.log(response);
-		console.log("error"); // make better error handling
-	}
-	return response;
-}
 
 async function InstallGlobalCommands(appId: string, commands: Command[]) {
 	const endpoint = `applications/${appId}/commands`;
