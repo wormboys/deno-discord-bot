@@ -49,25 +49,7 @@ async function home(request: Request) {
 			return json({
 				type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
 				data: {
-					content:
-						"Hey, I am glad you are asking for help, noob. What do you need help with?",
-					components: [
-						{
-							type: 1, // add enum for component types later
-							components: [
-								{
-									type: 2,
-									label: "How to use this bot",
-                                    style: 1,
-								},
-								{
-									type: 2,
-									label: "What commands are available",
-                                    style: 1,
-								},
-							],
-						},
-					],
+                    content: "you did the thing",
 				},
 			});
 		}
