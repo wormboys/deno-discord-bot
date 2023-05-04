@@ -7,8 +7,14 @@ import {
 
 // import our functions from other files
 import { verifySignature } from "./utils/discordApi.ts";
-import { InteractionResponseType, InteractionType } from "./types/index.ts";
 
+// import the types we need from the discord api
+import {
+	InteractionResponseType,
+	InteractionType,
+} from "https://deno.land/x/discord_api_types@0.37.41/v10.ts";
+
+// start server with home function as handler
 serve({
 	"/": home,
 });
@@ -38,18 +44,36 @@ async function home(request: Request) {
 
 	// extract the body of the request (and provide default values)
 	const { type = 0, data = { options: [] } } = JSON.parse(body);
-	if (type == InteractionType.PING) {
+	if (type == InteractionType.Ping) {
 		return json({ type: 1 });
 	}
 
-	if (type == InteractionType.APPLICATION_COMMAND) {
+	if (type == InteractionType.ApplicationCommand) {
 		// extract name and options from data
 		const { name } = data;
 		if (name === "help") {
+			console.log("help command triggered");
 			return json({
-				type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+				type: InteractionResponseType.ChannelMessageWithSource,
 				data: {
-                    content: "you did the thing",
+					content: "you did the thing",
+					components: [
+						{
+							type: 1,
+							components: [
+								{
+									type: 2,
+									label: "Button",
+									style: 1,
+								},
+								{
+									type: 2,
+									label: "Button2",
+									style: 1,
+								},
+							],
+						},
+					],
 				},
 			});
 		}
