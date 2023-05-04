@@ -23,24 +23,6 @@ const commands = [
 		description:
 			"List all of my commands or info about a specific command.",
 		type: 1,
-		options: [
-			{
-				type: 3,
-				name: "option",
-				description: "pick your option",
-				required: true,
-                choices: [
-					{
-						name: "option 1",
-						value: "option1",
-					},
-					{
-						name: "option 2",
-						value: "option2",
-					},
-				],
-			},
-		],
 	},
 	{
 		name: "attack",
@@ -48,7 +30,7 @@ const commands = [
 	},
 ];
 
-async function InstallGlobalCommands(appId: string, commands: Command[]) {
+async function InstallGlobalCommands(appId: string, commands) {
 	const endpoint = `applications/${appId}/commands`;
 	const options = {
 		method: "PUT",

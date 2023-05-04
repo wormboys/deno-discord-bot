@@ -59,19 +59,9 @@ async function home(request: Request) {
 					content: "you did the thing",
 					components: [
 						{
-							type: 1,
-							components: [
-								{
-									type: 2,
-									label: "Button",
-									style: 1,
-								},
-								{
-									type: 2,
-									label: "Button2",
-									style: 1,
-								},
-							],
+							type: 2,
+                            label: "Click me",
+                            style: 1,
 						},
 					],
 				},
