@@ -57,13 +57,6 @@ async function home(request: Request) {
 				type: InteractionResponseType.ChannelMessageWithSource,
 				data: {
 					content: "you did the thing",
-					components: [
-						{
-							type: 2,
-                            label: "Click me",
-                            style: 1,
-						},
-					],
 				},
 			});
 		}
