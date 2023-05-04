@@ -59,7 +59,7 @@ async function home(request: Request) {
 					content: "you did the thing",
 					components: [
 						{
-							type: 2,
+							type: 1,
 							components: [
 								{
 									type: 2,
