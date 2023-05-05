@@ -1,4 +1,4 @@
-import nacl from "https://cdn.skypack.dev/-/tweetnacl@v1.0.3-G4yM3nQ8lnXXlGGQADqJ/dist=es2019,mode=types/nacl.d.ts";
+import nacl from "https://cdn.skypack.dev/tweetnacl@v1.0.3?dts";
 import { load } from "https://deno.land/std@0.185.0/dotenv/mod.ts";
 const env = await load();
 
