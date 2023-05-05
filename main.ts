@@ -38,6 +38,8 @@ async function home(request: Request) {
 
 	// extract the body of the request (and provide default values)
 	const { type = 0, data = { options: [] } } = JSON.parse(body);
+
+	// handle ping
 	if (type == InteractionType.Ping) {
 		return json({ type: 1 });
 	}
@@ -72,6 +74,29 @@ async function home(request: Request) {
 							],
 						},
 					],
+				},
+			});
+		}
+	}
+
+	// handle buttons
+	if (type === InteractionType.MessageComponent) {
+		const { custom_id } = data;
+		if (custom_id === "test") {
+			console.log("test button triggered");
+			return json({
+				type: InteractionResponseType.ChannelMessageWithSource,
+				data: {
+					content: "test button triggered",
+				},
+			});
+		}
+		if (custom_id === "test2") {
+			console.log("test2 button triggered");
+			return json({
+				type: InteractionResponseType.ChannelMessageWithSource,
+				data: {
+					content: "test2 button triggered",
 				},
 			});
 		}
