@@ -1,18 +1,12 @@
-//import simple routing functionality from the Sift library
-import {
-	json,
-	serve,
-	validateRequest,
-} from "https://deno.land/x/sift@0.6.0/mod.ts";
-
 // import our functions from other files
-import { verifySignature } from "./utils/discordApi.ts";
-
-// import the types we need from the discord api
 import {
 	InteractionResponseType,
 	InteractionType,
-} from "https://deno.land/x/discord_api_types@0.37.41/v10.ts";
+	json,
+	serve,
+	validateRequest,
+} from "./deps.ts";
+import { verifySignature } from "./utils/utils.ts";
 
 // start server with home function as handler
 serve({
@@ -44,9 +38,13 @@ async function home(request: Request) {
 
 	// extract the body of the request (and provide default values)
 	const { type = 0, data = { options: [] } } = JSON.parse(body);
+
+	// handle ping
 	if (type == InteractionType.Ping) {
 		return json({ type: 1 });
 	}
+
+	// Now we want to forward the request to the correct function
 
 	if (type == InteractionType.ApplicationCommand) {
 		// extract name and options from data
@@ -63,13 +61,13 @@ async function home(request: Request) {
 							components: [
 								{
 									type: 2,
-                                    custom_id: "test",
+									custom_id: "test",
 									label: "Button",
 									style: 1,
 								},
 								{
 									type: 2,
-                                    custom_id: "test2",
+									custom_id: "test2",
 									label: "Button2",
 									style: 1,
 								},
@@ -81,6 +79,30 @@ async function home(request: Request) {
 		}
 	}
 
+	// handle buttons
+	if (type === InteractionType.MessageComponent) {
+		const { custom_id } = data;
+		if (custom_id === "test") {
+			console.log("test button triggered");
+			return json({
+				type: InteractionResponseType.ChannelMessageWithSource,
+				data: {
+					content: "test button triggered",
+				},
+			});
+		}
+		if (custom_id === "test2") {
+			console.log("test2 button triggered");
+			return json({
+				type: InteractionResponseType.ChannelMessageWithSource,
+				data: {
+					content: "test2 button triggered",
+				},
+			});
+		}
+	}
+
+	// handle other types of requests with an error
 	console.log(request);
 	return json(
 		{
