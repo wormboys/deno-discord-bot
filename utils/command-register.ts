@@ -1,6 +1,6 @@
 // add commands to the bot
-import { load } from "https://deno.land/std@0.185.0/dotenv/mod.ts";
-import { DiscordRequest } from "./discordApi.ts";
+import { load } from "../deps.ts";
+import { DiscordRequest } from "./utils.ts";
 const env = await load();
 
 // commands to add to the bot, should contain a name and a description
@@ -28,6 +28,39 @@ const commands = [
 		name: "attack",
 		description: "attack a country",
 	},
+	{
+		name: "queue_action",
+		description: "Add an action to the game queue",
+		type: 1,
+		options: [
+			{
+				name: "action_type",
+				description: "Select the type of action to queue",
+				type: 3,
+				required: true,
+				choices: [
+					{
+						name: "launch missile",
+						value: "launch_missile",
+					},
+					{
+						name: "prepare defence",
+						value: "prepare_defence",
+					},
+					{
+						name: "espionage",
+						value: "espionage",
+					},
+				],
+			},
+            {
+                name: "target",
+                description: "Select the target of the action",
+                type: 6,
+                required: false,
+            },
+		],
+	},
 ];
 
 async function InstallGlobalCommands(appId: string, commands) {
@@ -39,7 +72,7 @@ async function InstallGlobalCommands(appId: string, commands) {
 	try {
 		const response = await DiscordRequest(endpoint, options);
 		const body = await response.text();
-		console.log(body);
+		console.info(body);
 	} catch (error) {
 		console.log(error);
 	}
